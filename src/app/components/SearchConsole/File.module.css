@@ -1,0 +1,8 @@
+.search_console_file {
+  outline: none;
+  list-style: none;
+}
+
+.search_console_file:focus {
+  background-color: #79C3EC;
+}

@@ -1,0 +1,11 @@
+.search_console_folder {
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+  outline: none;
+  list-style: none;
+}
+
+.search_console_folder:focus {
+  background-color: #79C3EC;
+}

@@ -1,0 +1,30 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  height: var(--nav-height);
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.lang {
+  font-size: 1.2rem;
+}
+
+.lang_button {
+  background-color: inherit;
+  border: none;
+  font-size: inherit;
+  font-weight: bolder;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.lang_button:not(:disabled):hover {
+  background-color: rgb(0, 0, 255, .08);
+}
+
+.lang_button:not(:disabled):active {
+  color: white;
+  background-color: rgb(0, 0, 255);
+}
