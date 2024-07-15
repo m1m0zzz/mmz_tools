@@ -6,15 +6,14 @@ import { FiChevronLeft, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { useHotkeys } from 'react-hotkeys-hook';
 
 import Nav from "./components/Nav";
-import Tracks, { Clip, Track } from "./components/tracks";
-
-import styles from "./page.module.css";
+import Tracks, { Clip, Track } from "./components/Tracks";
+import { SearchConsole } from "./components/SearchConsole";
 
 import { findDevice } from "./types/device";
-
 import { devices } from "./data";
+
 import coverImage from "./assets/mmz_tools.png";
-import { SearchConsole } from "./components/SearchConsole";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [lang, setLang] = useState<"ja" | "en">("ja");
