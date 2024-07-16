@@ -53,14 +53,16 @@ export const SearchConsoleFolder = forwardRef(function _SearchConsoleFolder({
         }}
         style={{backgroundColor: isActive ? "#79C3EC" : undefined}}
       >
-        <FiPlay
-          fill="black"
-          size={10}
-          style={{
-            marginRight: 2,
-            transform: `rotate(${isOpen ? 90 : 0}deg)`
-          }}
-        />
+        <span>
+          <FiPlay
+            fill="black"
+            size={10}
+            style={{
+              marginRight: 2,
+              transform: `rotate(${isOpen ? 90 : 0}deg)`
+            }}
+          />
+        </span>
         <span style={{marginRight: 3}}>
           <FiFolder />
         </span>

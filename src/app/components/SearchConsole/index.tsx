@@ -21,6 +21,7 @@ export const SearchConsole = forwardRef(function _SearchConsole({
   setIsDevicesOpen
 }: Props, ref) {
   const [isConsoleOpen, setIsConsoleOpen] = useState(true);
+  const [isFocus, setIsFocus] = useState(false);
   const [searchString, setSearchString] = useState("");
   // const [activeDevice, setActiveDevice] = useState("");
   const [activeFolder, setActiveFolder] = useState("");
@@ -64,7 +65,7 @@ export const SearchConsole = forwardRef(function _SearchConsole({
   }, [searchString]);
 
   const handleArrowDownKeyDown = () => {
-    deviceRef(activeDevice).current?.blur();
+    // deviceRef(activeDevice).current?.blur();
     const device = findActiveDeviceWithDirection(searchedDevices, activeDevice, activeFolder, 1);
     if (device && device != "-1") {
       const ref = deviceRef(device);
@@ -74,7 +75,7 @@ export const SearchConsole = forwardRef(function _SearchConsole({
   }
 
   const handleArrowUpKeyDown = () => {
-    deviceRef(activeDevice).current?.blur();
+    // deviceRef(activeDevice).current?.blur();
     const device = findActiveDeviceWithDirection(searchedDevices, activeDevice, activeFolder, -1);
     if (device && device != "-1") {
       const ref = deviceRef(device);
@@ -92,7 +93,11 @@ export const SearchConsole = forwardRef(function _SearchConsole({
   }
 
   return (
-    <div className={styles.console}>
+    <div
+      className={styles.console}
+      onFocus={() => setIsFocus(true)}
+      onBlur={() => setIsFocus(false)}
+    >
       <div className={styles.search_input_wrap}>
         <button
           className={styles.console_button}
@@ -109,21 +114,30 @@ export const SearchConsole = forwardRef(function _SearchConsole({
           type="search"
           placeholder="検索 (Ctrl + F)"
           aria-label="デバイスを検索"
-          style={isConsoleOpen ? {} : {display: "none"}}
+          style={{
+            display: isConsoleOpen ? undefined : "none",
+            borderColor: isFocus ? "#777777" : undefined
+          }}
           onChange={(event) => {
             setSearchString(event.target.value);
           }}
           onKeyDown={(event) => {
             if (event.key == "ArrowDown") {
               event.preventDefault();
-              event.currentTarget.blur();
+              // event.currentTarget.blur();
               if (searchedDevices.length > 0)
                 deviceRef(searchedDevices[0].name).current?.focus();
             }
           }}
         />
       </div>
-      <ol className={styles.result} style={{display: isConsoleOpen ? "block" : "none"}}>
+      <ul
+        className={styles.result}
+        style={{
+          display: isConsoleOpen ? "block" : "none",
+          borderColor: isFocus ? "#777777" : undefined
+        }}
+      >
         {searchedDevices.map((device: Folder | Device)  => {
           if (isDevice(device)) {
             return (
@@ -171,7 +185,7 @@ export const SearchConsole = forwardRef(function _SearchConsole({
             )
           }
         })}
-      </ol>
+      </ul>
     </div>
   )
 })

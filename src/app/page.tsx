@@ -14,11 +14,18 @@ import { devices } from "./data";
 
 import coverImage from "./assets/mmz_tools.png";
 import styles from "./page.module.css";
+import { useWindowEvent } from "./hooks/windowEvent";
 
 export default function Home() {
   const [lang, setLang] = useState<"ja" | "en">("ja");
   const [isDevicesOpen, setIsDevicesOpen] = useState(false);
   const [activeDevice, setActiveDevice] = useState("");
+
+  const mouseX = useRef(-1);
+  const mouseY = useRef(-1);
+
+  const bottomDragZoneY = useRef<number | null>(null);
+  const BOTTOM_HEIGHT = 190;
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -29,6 +36,29 @@ export default function Home() {
   useHotkeys('ctrl+alt+l', () => {
     setIsDevicesOpen(!isDevicesOpen);
   }, { preventDefault: true });
+
+  useWindowEvent('mousemove', (event) => {
+    mouseX.current = event.clientX;
+    mouseY.current = event.clientY;
+
+    if (bottomDragZoneY.current) {
+      document.body.style.cursor = "n-resize";
+      if (bottomDragZoneY.current - event.clientY > 100) {
+        console.log("open");
+        setIsDevicesOpen(true);
+        bottomDragZoneY.current -= BOTTOM_HEIGHT;
+      } else if (bottomDragZoneY.current - event.clientY < -100) {
+        console.log("close");
+        setIsDevicesOpen(false);
+        bottomDragZoneY.current += BOTTOM_HEIGHT;
+      }
+    }
+  });
+
+  useWindowEvent('mouseup', () => {
+    bottomDragZoneY.current = null;
+    document.body.style.cursor = "auto";
+  });
 
   const activeDeviceData = useMemo(
     () => findDevice(devices, activeDevice),
@@ -46,7 +76,7 @@ export default function Home() {
           ref={searchInputRef}
         />
         <Tracks>
-          <Track name="mmz_tools" index={1} bg="#d0dbef">
+          <Track name="mmz_tools" index={1} bg="#E3BF61">
             <Clip pos={1} len={6} color="white">
               <img
                 src={coverImage.src} alt="thumbnail"
@@ -123,36 +153,46 @@ export default function Home() {
           </Track>
         </Tracks>
       </div>
-      <div className={styles.bottom} style={isDevicesOpen ? {} : {display: "none"}}>
-        <div className={`${styles.bottom_item} ${styles.information}`}>
-          <p className={styles.info_title}>{activeDeviceData?.name || "info view"}</p>
-          <div className={styles.info_desc}>
-            {(activeDeviceData?.description || "description").split("\n").map((desc, index) => {
-              return <p key={index}>{desc}</p>
-            }) }
+      <div className={styles.bottom_wrap}>
+        <div
+          className={styles.bottom_drag_zone}
+          onMouseDown={(event) => {
+            event.preventDefault();
+            bottomDragZoneY.current = event.clientY
+            console.log(event.clientX, event.clientY);
+          }}
+        ></div>
+        <div className={styles.bottom} style={isDevicesOpen ? {} : {display: "none"}}>
+          <div className={`${styles.bottom_item} ${styles.information}`}>
+            <p className={styles.info_title}>{activeDeviceData?.name || "info view"}</p>
+            <div className={styles.info_desc}>
+              {(activeDeviceData?.description || "description").split("\n").map((desc, index) => {
+                return <p key={index}>{desc}</p>
+              }) }
+            </div>
+          </div>
+          <div className={`${styles.bottom_item} ${styles.device}`}>
+            {/* note: ディスプレイズーム：128%, 高さ240px */}
+            {
+              activeDeviceData ?
+              <img
+                className={styles.device_image}
+                src={activeDeviceData.imagePath}
+                alt={activeDeviceData.name}
+              /> :
+              <div className={styles.device_message}>
+                インストゥルメントまたはサンプルをここへドロップします
+              </div>
+            }
           </div>
         </div>
-        <div className={`${styles.bottom_item} ${styles.device}`}>
-          {/* note: ディスプレイズーム：128%, 高さ240px */}
-          {
-            activeDeviceData ?
-            <img
-              className={styles.device_image}
-              src={activeDeviceData.imagePath}
-              alt={activeDeviceData.name}
-            /> :
-            <div className={styles.device_message}>
-              インストゥルメントまたはサンプルをここへドロップします
-            </div>
-          }
-        </div>
       </div>
-      <div className={styles.footer}>
+      <footer className={styles.footer}>
         <div className={styles.credit}>
           &copy; {(new Date).getFullYear()} mimoz
         </div>
         <button
-          className={styles.device_button}
+          className={styles.bottom_button}
           onClick={() => setIsDevicesOpen(!isDevicesOpen)}
         >
           {isDevicesOpen ?
@@ -160,7 +200,7 @@ export default function Home() {
             <FiChevronLeft color={"white"} size={"1.2rem"} />
           }
         </button>
-      </div>
+      </footer>
     </main>
   );
 }

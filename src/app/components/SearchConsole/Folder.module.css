@@ -1,9 +1,11 @@
 .search_console_folder {
+  width: 100%;
   display: flex;
   align-items: center;
   padding-left: 2px;
   outline: none;
   list-style: none;
+  text-wrap: nowrap;
 }
 
 .search_console_folder:focus {

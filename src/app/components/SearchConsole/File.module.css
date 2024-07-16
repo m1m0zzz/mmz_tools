@@ -1,6 +1,8 @@
 .search_console_file {
+  width: 100%;
   outline: none;
   list-style: none;
+  text-wrap: nowrap;
 }
 
 .search_console_file:focus {

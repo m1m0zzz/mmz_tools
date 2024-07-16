@@ -73,6 +73,10 @@ img {
   background-color: #777777;
 }
 
+::-webkit-scrollbar-corner {
+  background-color: inherit;
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import styles from "./index.module.css"
 import ToggleButton from "../ToggleButton";
+import { useWindowEvent } from "@/app/hooks/windowEvent";
 
 
 interface TrackProps {
@@ -68,6 +69,12 @@ interface Props {
 }
 
 export default function Tracks({ children }: Props) {
+  // useWindowEvent('resize', (event) => {
+  //   console.log(timeBarRef.current?.clientWidth);
+  // });
+
+  // const timeBarRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className={styles.tracks}>
       <div className={styles.time_bar}></div>

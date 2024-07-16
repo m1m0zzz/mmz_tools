@@ -37,13 +37,13 @@
 }
 
 .track {
-  width: 100%;
-  /* min-height: 200px; */
   display: flex;
+  width: 100%;
 }
 
 .clips_wrap {
   width: calc(100% - calc(var(--track-title-width) + var(--track-control-width)));
+  min-width: 400px;
   background-color: #C6C6C6;
   border: 1px solid #919191;
   background-image: linear-gradient(
