@@ -39,6 +39,7 @@ export const SearchConsoleFolder = forwardRef(function _SearchConsoleFolder({
         onClick={() => onFocus && onFocus(name)}
         onFocus={() => onFocus && onFocus(name)}
         onDoubleClick={() => onOpen && onOpen(name)}
+        onTouchStart={() => onOpen && onOpen(name)}
         onKeyDown={(event) => {
           if (event.key == "Enter" || event.key == "Space") {
             onOpen && onOpen(name);
@@ -55,9 +56,11 @@ export const SearchConsoleFolder = forwardRef(function _SearchConsoleFolder({
       >
         <span>
           <FiPlay
+            onClick={() => onOpen && onOpen(name)}
             fill="black"
             size={10}
             style={{
+              display: "block",
               marginRight: 2,
               transform: `rotate(${isOpen ? 90 : 0}deg)`
             }}

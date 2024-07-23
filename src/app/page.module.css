@@ -12,6 +12,22 @@
   padding: 0px 6px 6px 6px;
 }
 
+.search_console_wrap {
+  max-width: 70%;
+  min-width: 120px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.search_console_drag_zone {
+  position: absolute;
+  top: 0;
+  right: -0.25rem;
+  width: 0.5rem;
+  height: 100%;
+  cursor: e-resize;
+}
+
 .cover_image {
   aspect-ratio: 1 / 1;
   max-height: 100%;

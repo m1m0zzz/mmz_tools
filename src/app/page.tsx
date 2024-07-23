@@ -20,14 +20,16 @@ export default function Home() {
   const [lang, setLang] = useState<"ja" | "en">("ja");
   const [isDevicesOpen, setIsDevicesOpen] = useState(false);
   const [activeDevice, setActiveDevice] = useState("");
+  const [searchConsoleWidth, setSearchConsoleWidth] = useState<number | undefined>(240);
 
+  const searchConsoleWrapRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const mouseX = useRef(-1);
   const mouseY = useRef(-1);
-
+  const searchConsoleDragged = useRef(false);
   const bottomDragZoneY = useRef<number | null>(null);
-  const BOTTOM_HEIGHT = 190;
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const BOTTOM_HEIGHT = 190;
 
   useHotkeys('ctrl+f', () => {
     searchInputRef.current?.focus();
@@ -41,14 +43,18 @@ export default function Home() {
     mouseX.current = event.clientX;
     mouseY.current = event.clientY;
 
+    if (searchConsoleDragged.current) {
+      document.body.style.cursor = "e-resize";
+      const pos = searchConsoleWrapRef.current?.getBoundingClientRect().left || 0;
+      setSearchConsoleWidth(mouseX.current - pos)
+    }
+
     if (bottomDragZoneY.current) {
       document.body.style.cursor = "n-resize";
-      if (bottomDragZoneY.current - event.clientY > 100) {
-        console.log("open");
+      if (bottomDragZoneY.current - mouseY.current > 100) {
         setIsDevicesOpen(true);
         bottomDragZoneY.current -= BOTTOM_HEIGHT;
-      } else if (bottomDragZoneY.current - event.clientY < -100) {
-        console.log("close");
+      } else if (bottomDragZoneY.current - mouseY.current < -100) {
         setIsDevicesOpen(false);
         bottomDragZoneY.current += BOTTOM_HEIGHT;
       }
@@ -57,6 +63,7 @@ export default function Home() {
 
   useWindowEvent('mouseup', () => {
     bottomDragZoneY.current = null;
+    searchConsoleDragged.current = false;
     document.body.style.cursor = "auto";
   });
 
@@ -69,12 +76,27 @@ export default function Home() {
     <main className={styles.main}>
       <Nav lang={lang} onUpdate={(l) => setLang(l)} />
       <div className={styles.top}>
-        <SearchConsole
-          activeDevice={activeDevice}
-          setActiveDevice={setActiveDevice}
-          setIsDevicesOpen={setIsDevicesOpen}
-          ref={searchInputRef}
-        />
+        <div
+          ref={searchConsoleWrapRef}
+          className={styles.search_console_wrap}
+          style={{
+            width: searchConsoleWidth
+          }}
+        >
+          <SearchConsole
+            activeDevice={activeDevice}
+            setActiveDevice={setActiveDevice}
+            setIsDevicesOpen={setIsDevicesOpen}
+            ref={searchInputRef}
+          />
+          <div
+            className={styles.search_console_drag_zone}
+            onMouseDown={(event) => {
+              event.preventDefault();
+              searchConsoleDragged.current = true;
+            }}
+          ></div>
+        </div>
         <Tracks>
           <Track name="mmz_tools" index={1} bg="#E3BF61">
             <Clip pos={1} len={6} color="white">
@@ -158,15 +180,14 @@ export default function Home() {
           className={styles.bottom_drag_zone}
           onMouseDown={(event) => {
             event.preventDefault();
-            bottomDragZoneY.current = event.clientY
-            console.log(event.clientX, event.clientY);
+            bottomDragZoneY.current = event.clientY;
           }}
         ></div>
         <div className={styles.bottom} style={isDevicesOpen ? {} : {display: "none"}}>
           <div className={`${styles.bottom_item} ${styles.information}`}>
-            <p className={styles.info_title}>{activeDeviceData?.name || "info view"}</p>
+            <p className={styles.info_title}>{activeDeviceData?.name || "インフォビュー"}</p>
             <div className={styles.info_desc}>
-              {(activeDeviceData?.description || "description").split("\n").map((desc, index) => {
+              {(activeDeviceData?.description || "デバイスの説明が表示されます").split("\n").map((desc, index) => {
                 return <p key={index}>{desc}</p>
               }) }
             </div>

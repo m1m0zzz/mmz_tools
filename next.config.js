@@ -1,6 +1,10 @@
+/**
+ * @type {import('next').NextConfig}
+ */
 module.exports = {
-  i18n: {
-    defaultLocale: 'ja',
-    locales: ['ja', 'en'],
-  }
+  output: "export",
+  // i18n: {
+  //   defaultLocale: 'ja',
+  //   locales: ['ja', 'en'],
+  // }
 }
