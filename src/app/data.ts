@@ -15,6 +15,7 @@ import tools_eq8_default from "@/app/assets/devices/tools_eq8_default.adv.jpg";
 import tools_freq_splitter from "@/app/assets/devices/tools_freq_splitter.adg.jpg";
 import tools_mid_side from "@/app/assets/devices/tools_mid_side.adg.jpg";
 import tools_natural_haas from "@/app/assets/devices/tools_natural_haas.adg.jpg";
+import tools_noise_osc from "@/app/assets/devices/tools_noise_osc.adv.jpg";
 import tools_scalable_lfo from "@/app/assets/devices/tools_scalable_lfo.adg.jpg";
 import tools_steep_eq from "@/app/assets/devices/tools_steep_eq.adg.jpg";
 import tools_stutter1 from "@/app/assets/devices/tools_stutter1.adg.jpg";
@@ -28,6 +29,16 @@ export const devices: (Folder | Device)[]  = [
         name: "tools_eq8_default.adv",
         description: "",
         imagePath: tools_eq8_default.src
+      },
+    ]
+  },
+  {
+    name: "Operator",
+    children: [
+      {
+        name: "tools_noise_osc.adv",
+        description: "",
+        imagePath: tools_noise_osc.src
       },
     ]
   },
