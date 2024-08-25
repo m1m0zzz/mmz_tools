@@ -16,6 +16,8 @@ import { findDevice } from "./types/device";
 import { devices } from "./data";
 import styles from "./page.module.css";
 
+const basePath = process.env.NODE_ENV == "production" ? "/mmz_tools/" : "/"
+
 export default function Home() {
   const [lang, setLang] = useState<"ja" | "en">("ja");
   const [isDevicesOpen, setIsDevicesOpen] = useState(false);
@@ -108,7 +110,7 @@ export default function Home() {
           <Track name="mmz_tools" index={1} bg="#E3BF61">
             <Clip pos={1} len={6} color="white">
               <img
-                src="/cover.jpg" alt="thumbnail"
+                src={basePath + "cover.jpg"} alt="thumbnail"
                 className={styles.cover_image}
               />
             </Clip>
