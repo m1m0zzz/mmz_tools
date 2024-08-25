@@ -14,7 +14,6 @@ import { useWindowEvent } from "./hooks/windowEvent";
 import { validate } from "./searchParam";
 import { findDevice } from "./types/device";
 import { devices } from "./data";
-import coverImage from "./assets/mmz_tools.png";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -109,12 +108,16 @@ export default function Home() {
           <Track name="mmz_tools" index={1} bg="#E3BF61">
             <Clip pos={1} len={6} color="white">
               <img
-                src={coverImage.src} alt="thumbnail"
+                src="/cover.jpg" alt="thumbnail"
                 className={styles.cover_image}
               />
             </Clip>
             {/* TODO: set url */}
-            <a href="#" className={styles.get_link_a}>
+            <a
+              className={styles.get_link_a}
+              href="https://mimoz.booth.pm/items/6039232"
+              target="_blank"
+            >
               <Clip pos={8} len={5}>
                 <div className={styles.get_link}>
                   <p>Get mmz_tools <FiExternalLink /></p>
@@ -134,7 +137,7 @@ export default function Home() {
                   </li>
                   <li>
                     <span className={styles.about_text}>
-                      Ableton Device Preset (*.adv) × 6
+                      Ableton Device Preset (*.adv) × 7
                     </span>
                   </li>
                 </ul>

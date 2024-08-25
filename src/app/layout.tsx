@@ -7,7 +7,7 @@ const noteSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 const title = "mmz_tools | Ableton Racks Pack"
 const description = "Ableton Live Racks mmz_tools"
 const siteUrl = "https://m1m0zzz.github.io/mmz_tools/"
-const imageUrl = siteUrl + "preview.png"
+const imageUrl = siteUrl + "cover.jpg"
 
 export const metadata: Metadata = {
   title: title,
