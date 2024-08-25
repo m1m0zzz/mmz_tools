@@ -7,6 +7,24 @@
   padding-right: 20px;
 }
 
+.right {
+  display: flex;
+  justify-content: space-between;
+}
+
+.share_button {
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  margin-right: 0.8rem;
+}
+
+.share_button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .lang {
   font-size: 1.2rem;
 }
