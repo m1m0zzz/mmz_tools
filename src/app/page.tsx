@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useSearchParams } from "next/navigation";
 
 import Nav from "./components/Nav";
 import Tracks, { Clip, Track } from "./components/Tracks";
@@ -19,8 +18,7 @@ import coverImage from "./assets/mmz_tools.png";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const [lang, setLang] = useState(validate<"ja" | "en">(searchParams, "lang", ["ja", "en"], "ja"));
+  const [lang, setLang] = useState<"ja" | "en">("ja");
   const [isDevicesOpen, setIsDevicesOpen] = useState(false);
   const [activeDevice, setActiveDevice] = useState("");
   const [searchConsoleWidth, setSearchConsoleWidth] = useState<number | undefined>(240);
@@ -33,6 +31,12 @@ export default function Home() {
   const bottomDragZoneY = useRef<number | null>(null);
 
   const BOTTOM_HEIGHT = 190;
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const searchParams = url.searchParams;
+    setLang(validate<"ja" | "en">(searchParams, "lang", ["ja", "en"], "ja"))
+  }, [])
 
   useHotkeys('ctrl+f', () => {
     searchInputRef.current?.focus();
