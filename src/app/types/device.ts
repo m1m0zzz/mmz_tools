@@ -1,6 +1,7 @@
 export type Device = {
   name: string,
   description: string,
+  description_en: string,
   imagePath: string
 }
 

@@ -4,20 +4,23 @@
 import { useMemo, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronUp, FiExternalLink } from "react-icons/fi";
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useSearchParams } from "next/navigation";
 
 import Nav from "./components/Nav";
 import Tracks, { Clip, Track } from "./components/Tracks";
 import { SearchConsole } from "./components/SearchConsole";
 
-import { findDevice } from "./types/device";
-import { devices } from "./data";
-
-import coverImage from "./assets/mmz_tools.png";
-import styles from "./page.module.css";
 import { useWindowEvent } from "./hooks/windowEvent";
 
+import { validate } from "./searchParam";
+import { findDevice } from "./types/device";
+import { devices } from "./data";
+import coverImage from "./assets/mmz_tools.png";
+import styles from "./page.module.css";
+
 export default function Home() {
-  const [lang, setLang] = useState<"ja" | "en">("ja");
+  const searchParams = useSearchParams();
+  const [lang, setLang] = useState(validate<"ja" | "en">(searchParams, "lang", ["ja", "en"], "ja"));
   const [isDevicesOpen, setIsDevicesOpen] = useState(false);
   const [activeDevice, setActiveDevice] = useState("");
   const [searchConsoleWidth, setSearchConsoleWidth] = useState<number | undefined>(240);
@@ -84,6 +87,7 @@ export default function Home() {
           }}
         >
           <SearchConsole
+            lang={lang}
             activeDevice={activeDevice}
             setActiveDevice={setActiveDevice}
             setIsDevicesOpen={setIsDevicesOpen}
@@ -97,7 +101,7 @@ export default function Home() {
             }}
           ></div>
         </div>
-        <Tracks>
+        <Tracks lang={lang}>
           <Track name="mmz_tools" index={1} bg="#E3BF61">
             <Clip pos={1} len={6} color="white">
               <img
@@ -185,9 +189,15 @@ export default function Home() {
         ></div>
         <div className={styles.bottom} style={isDevicesOpen ? {} : {display: "none"}}>
           <div className={`${styles.bottom_item} ${styles.information}`}>
-            <p className={styles.info_title}>{activeDeviceData?.name || "インフォビュー"}</p>
+            <p className={styles.info_title}>
+              {activeDeviceData?.name || (lang == "ja" ? "インフォビュー" : "info view")}
+            </p>
             <div className={styles.info_desc}>
-              {(activeDeviceData?.description || "デバイスの説明が表示されます").split("\n").map((desc, index) => {
+              {((
+                lang == "ja" ?
+                  (activeDeviceData?.description || "デバイスの説明が表示されます") : 
+                  (activeDeviceData?.description_en || "device description")
+                )).split("\n").map((desc, index) => {
                 return <p key={index}>{desc}</p>
               }) }
             </div>
@@ -202,7 +212,10 @@ export default function Home() {
                 alt={activeDeviceData.name}
               /> :
               <div className={styles.device_message}>
-                インストゥルメントまたはサンプルをここへドロップします
+                {lang == "ja" ?
+                  "インストゥルメントまたはサンプルをここへドロップします" :
+                  "Drop Instruments or Samples Here"
+                }
               </div>
             }
           </div>

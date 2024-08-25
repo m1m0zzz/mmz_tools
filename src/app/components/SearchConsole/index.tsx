@@ -10,12 +10,14 @@ import { SearchConsoleFolder } from "./Folder";
 import styles from "./index.module.css"
 
 interface Props {
+  lang: string;
   activeDevice: string;
   setActiveDevice: (device: string) => void;
   setIsDevicesOpen: (isOpen: boolean) => void;
 }
 
 export const SearchConsole = forwardRef(function _SearchConsole({
+  lang,
   activeDevice,
   setActiveDevice,
   setIsDevicesOpen
@@ -112,8 +114,8 @@ export const SearchConsole = forwardRef(function _SearchConsole({
           ref={inputRef}
           className={styles.search_input}
           type="search"
-          placeholder="検索 (Ctrl + F)"
-          aria-label="デバイスを検索"
+          placeholder={(lang == "ja" ? "検索" : "Search") + " (Ctrl + F)"}
+          aria-label={lang == "ja" ? "デバイスを検索" : "Search Devices"}
           style={{
             display: isConsoleOpen ? undefined : "none",
             borderColor: isFocus ? "#777777" : undefined

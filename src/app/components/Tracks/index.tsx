@@ -1,7 +1,7 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 import styles from "./index.module.css"
 import ToggleButton from "../ToggleButton";
-import { useWindowEvent } from "@/app/hooks/windowEvent";
+import { FiCircle } from "react-icons/fi";
 
 
 interface TrackProps {
@@ -47,7 +47,7 @@ export function Track({ name, index, bg, color, minHeight, children }: TrackProp
               <ToggleButton
                 onColor="#FF4F23"
                 style={{flex: 1}}
-              >●</ToggleButton>
+              ><FiCircle size={"50%"} fill="black" /></ToggleButton>
             </div>
           </div>
           <div className={styles.row_grid_2} style={{marginBottom: 4}}>
@@ -65,10 +65,11 @@ export function Track({ name, index, bg, color, minHeight, children }: TrackProp
 }
 
 interface Props {
+  lang: string;
   children: ReactNode;
 }
 
-export default function Tracks({ children }: Props) {
+export default function Tracks({ lang, children }: Props) {
   // useWindowEvent('resize', (event) => {
   //   console.log(timeBarRef.current?.clientWidth);
   // });
@@ -86,7 +87,10 @@ export default function Tracks({ children }: Props) {
               <div className={styles.clips_dummy}>
                 <div className={styles.dummy_clip}>
                   <p className={styles.dummy_clip_message}>
-                    ファイルとデバイスをここへドロップします
+                    {lang == "ja" ?
+                      "ファイルとデバイスをここへドロップします" :
+                      "Drop Files and Devices Here"
+                    }
                   </p>
                 </div>
               </div>

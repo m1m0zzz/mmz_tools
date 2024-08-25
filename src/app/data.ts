@@ -27,7 +27,8 @@ export const devices: (Folder | Device)[]  = [
     children: [
       {
         name: "tools_eq8_default.adv",
-        description: "",
+        description: "見やすさ、使いやすさを意識した EQ Eight\n[デフォルトのプリセットとして保存] を推奨。",
+        description_en: "EQ Eight for ease of viewing and use.\n[Save as default Presets] is recommended.",
         imagePath: tools_eq8_default.src
       },
     ]
@@ -37,7 +38,8 @@ export const devices: (Folder | Device)[]  = [
     children: [
       {
         name: "tools_noise_osc.adv",
-        description: "",
+        description: "ノイズオシレーター",
+        description_en: "noise oscillator",
         imagePath: tools_noise_osc.src
       },
     ]
@@ -47,22 +49,26 @@ export const devices: (Folder | Device)[]  = [
     children: [
       {
         name: "ducker1.adv",
-        description: "ducker dayo yo yo",
+        description: "ダッキング用シェイパー",
+        description_en: "Shaper for ducking",
         imagePath: ducker1.src
       },
       {
         name: "ducker2.adv",
-        description: "yo yo yo",
+        description: "ダッキング用シェイパー",
+        description_en: "Shaper for ducking",
         imagePath: ducker2.src
       },
       {
         name: "stutter1.adv",
-        description: "",
+        description: "スタッター用シェイパー",
+        description_en: "Shaper for stutter",
         imagePath: stutter1.src
       },
       {
         name: "stutter2.adv",
-        description: "",
+        description: "スタッター用シェイパー",
+        description_en: "Shaper for stutter",
         imagePath: stutter2.src
       },
     ]
@@ -72,74 +78,88 @@ export const devices: (Folder | Device)[]  = [
     children: [
       {
         name: "ducker1_midi.adv",
-        description: "",
+        description: "MIDIトリガー ダッキング用シェイパー",
+        description_en: "MIDI trigger Shaper for ducking",
         imagePath: ducker1_midi.src
       },
     ]
   },
   {
     name: "tools_bass_mono.adg",
-    description: "Utilityの[Bass Mono] をより広い周波数で使えるようにしたデバイス。ただし、位相ズレに注意",
+    description: "低音をモノラルにするデバイス。ただし、位相ズレに注意！",
+    description_en: "A device that makes bass sound mono. However, beware of phase shift!",
     imagePath: tools_bass_mono.src
   },
   {
     name: "tools_bw_filter.adg",
-    description: "Band Width Filter。[Width] を上げるとバンド幅が狭くなります。中心の周波数は 400Hz。",
+    description: "Band Width Filter。[Width] でバンド幅を調整できる。中心の周波数は 400Hz",
+    description_en: "Band Width Filter.\nThe bandwidth can be adjusted with [Width]. The center frequency is 400Hz",
     imagePath: tools_bw_filter.src
   },
   {
     name: "tools_dry_wet.adg",
-    description: "すべてのデバイス・ラックに Dry/Wet を追加する。",
+    description: "すべてのデバイスとラックに [Dry/Wet] パラメーターを追加する。",
+    description_en: "Add [Dry/Wet] parameters to all devices and racks.",
     imagePath: tools_dry_wet.src
   },
   {
     name: "tools_ducker1.adg",
     description: "テンポベースのダッキングツール。\n[depth] でダッキングの深さを調節できる。",
+    description_en: "Tempo based ducking tool.\nDucking depth can be adjusted with [depth].",
     imagePath: tools_ducker1.src
   },
   {
     name: "tools_ducker1_midi.adg",
-    description: "ducker1のMIDIでトリガーするバージョン。",
+    description: "ducker1のMIDIでトリガーするバージョン",
+    description_en: "MIDI trigger version ducker1",
     imagePath: tools_ducker1_midi.src
   },
   {
     name: "tools_ducker2.adg",
-    description: "より深く、グルーヴ感のあるダッキング。",
+    description: "より深く、よりグルーヴィーなダッキング",
+    description_en: "Deeper and groovier ducking",
     imagePath: tools_ducker2.src
   },
   {
     name: "tools_freq_splitter.adg",
-    description: "",
+    description: "入力された周波数を Low と High に分離する",
+    description_en: "frequency splitter",
     imagePath: tools_freq_splitter.src
   },
   {
     name: "tools_mid_side.adg",
-    description: "",
+    description: "Mid/Side 分離機",
+    description_en: "Mid/Side splitter",
     imagePath: tools_mid_side.src
   },
   {
     name: "tools_natural_haas.adg",
-    description: "",
+    description: "自然に聞こえるように設計されたハースエフェクト",
+    description_en: "Haas effects designed to sound natural.",
     imagePath: tools_natural_haas.src
   },
   {
     name: "tools_scalable_lfo.adg",
-    description: "",
+    description: "[Scale] でアマウント量を調節可能なLFO",
+    description_en: "LFO with [Scale] adjustable amount.",
     imagePath: tools_scalable_lfo.src
   },
   {
     name: "tools_steep_eq.adg",
-    description: "",
+    description: "フィルターカーブの急な ロー/ハイ パスフィルター",
+    description_en: "Steep filter curve Low/High pass filter",
     imagePath: tools_steep_eq.src
   },
   {
     name: "tools_stutter1.adg",
-    description: "",
+    description: "[Depth] で深さを調節できるスタッター",
+    description_en: "Stutter with adjustable [Depth]",
     imagePath: tools_stutter1.src
   },
   {
     name: "tools_stutter2.adg",
-    description: "",
+    description: "[Depth] で深さを調節できるスタッター",
+    description_en: "Stutter with adjustable [Depth]",
     imagePath: tools_stutter2.src
   },
 ]
