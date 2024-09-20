@@ -141,6 +141,11 @@ export default function Home() {
                       Ableton Device Preset (*.adv) × 7
                     </span>
                   </li>
+                  <li>
+                    <span className={styles.about_text}>
+                      Ableton Live Set (*.als) (Template) × 1
+                    </span>
+                  </li>
                 </ul>
               </section>
               <section className={styles.about_section}>
