@@ -13,6 +13,7 @@ export default function Nav({ lang, onUpdate }: Props) {
       <div className={styles.right}>
         <a
           className={styles.share_button}
+          target="_blank"
           href="http://twitter.com/share?url=https://m1m0zzz.github.io/mmz_tools&text=mmz_tools%20%7C%20Ableton%20Racks%20Pack">
           <FiShare2 size={"1rem"} />
         </a>

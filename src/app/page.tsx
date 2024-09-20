@@ -114,7 +114,6 @@ export default function Home() {
                 className={styles.cover_image}
               />
             </Clip>
-            {/* TODO: set url */}
             <a
               className={styles.get_link_a}
               href="https://mimoz.booth.pm/items/6039232"
@@ -134,7 +133,7 @@ export default function Home() {
                 <ul>
                   <li>
                     <span className={styles.about_text}>
-                      Ableton Group Preset (*.adg) × 13
+                      Ableton Group Preset (*.adg) × 14
                     </span>
                   </li>
                   <li>
@@ -204,7 +203,7 @@ export default function Home() {
             <div className={styles.info_desc}>
               {((
                 lang == "ja" ?
-                  (activeDeviceData?.description || "デバイスの説明が表示されます") : 
+                  (activeDeviceData?.description || "デバイスの説明が表示されます") :
                   (activeDeviceData?.description_en || "device description")
                 )).split("\n").map((desc, index) => {
                 return <p key={index}>{desc}</p>

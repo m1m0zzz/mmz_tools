@@ -7,6 +7,7 @@ import stutter2 from "@/app/assets/devices/stutter2.adv.jpg";
 import ducker1_midi from "@/app/assets/devices/ducker1_midi.adv.jpg";
 import tools_bass_mono from "@/app/assets/devices/tools_bass_mono.adg.jpg";
 import tools_bw_filter from "@/app/assets/devices/tools_bw_filter.adg.jpg";
+import tools_clear from "@/app/assets/devices/tools_clear.adg.jpg";
 import tools_dry_wet from "@/app/assets/devices/tools_dry_wet.adg.jpg";
 import tools_ducker1 from "@/app/assets/devices/tools_ducker1.adg.jpg";
 import tools_ducker1_midi from "@/app/assets/devices/tools_ducker1_midi.adg.jpg";
@@ -95,6 +96,12 @@ export const devices: (Folder | Device)[]  = [
     description: "Band Width Filter。[Width] でバンド幅を調整できる。中心の周波数は 400Hz",
     description_en: "Band Width Filter.\nThe bandwidth can be adjusted with [Width]. The center frequency is 400Hz",
     imagePath: tools_bw_filter.src
+  },
+  {
+    name: "tools_clear.adg",
+    description: "音に透明感を与えるエキサイター",
+    description_en: "Exciter that adds clarity to sound",
+    imagePath: tools_clear.src
   },
   {
     name: "tools_dry_wet.adg",
