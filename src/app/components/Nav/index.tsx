@@ -7,6 +7,9 @@ interface Props {
 }
 
 export default function Nav({ lang, onUpdate }: Props) {
+  const shareURL = 'https://m1m0zzz.github.io/mmz_tools'
+  const shareText = encodeURI('mmz_tools | Ableton Racks Pack from @m1m0zzz')
+
   return (
     <nav className={styles.nav}>
       <h1>mmz_tools</h1>
@@ -14,7 +17,7 @@ export default function Nav({ lang, onUpdate }: Props) {
         <a
           className={styles.share_button}
           target="_blank"
-          href="http://twitter.com/share?url=https://m1m0zzz.github.io/mmz_tools&text=mmz_tools%20%7C%20Ableton%20Racks%20Pack">
+          href={`http://twitter.com/share?url=${shareURL}&text=${shareText}`}>
           <FiShare2 size={"1rem"} />
         </a>
         <div className={styles.lang}>
